@@ -45,11 +45,49 @@ int setElement(TABLEAU* tab, int pos, int element) {
 			}
 			tab->size += (pos - tab->size);
 		}
-		if (*(tab->elt + pos - 1) == 0) {  // Si 
+		if (*(tab->elt + pos - 1) == 0) {  // Si on ne remplace pas d'élément
 			tab->eltsCount += 1;
 		}
 		*(tab->elt + pos - 1) = element;
 		return(pos);
+	}
+}
+
+int displayElements(TABLEAU* tab, int startPos, int endPos) {
+	int tmp;
+	if (tab->elt == NULL) {
+		return(-1);
+	}
+	else {
+		if (startPos > endPos) {
+			tmp = startPos;
+			startPos = endPos;
+			endPos = tmp;
+		}
+		for (tmp = startPos - 1; tmp < endPos; tmp++) {
+			printf_s("%d", *(tab->elt + tmp));
+		}
+		return(0);
+	}
+}
+
+int deleteElements(TABLEAU* tab, int startPos, int endPos) {
+	int tmp;
+	if (tab->elt == NULL) {
+		return(-1);
+	}
+	else {
+		if (startPos > endPos) {	
+			tmp = startPos;
+			startPos = endPos;
+			endPos = tmp;
+		}
+		for (tmp = 0; tmp < tab->size - endPos; tmp++) {
+			*(tab->elt + startPos - 1 + tmp) = *(tab->elt + endPos + tmp);
+		}
+		tab->elt = (int*)realloc(tab->elt, (tab->size - endPos + startPos) * sizeof(int));
+		tab->size = tab->size - endPos + startPos;
+		return(tab->size);
 	}
 }
 
