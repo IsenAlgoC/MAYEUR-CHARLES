@@ -12,6 +12,8 @@ int main() {
 	setElement(&tab, 9, 12);
 	displayElements(&tab, 9, TAILLEINITIALE +1);
 
+	deleteElements(&tab, 9, 10);
+	displayElements(&tab, 1, TAILLEINITIALE);
 
 	free(tab.elt);
 }
