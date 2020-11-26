@@ -4,12 +4,12 @@
 #define TAILLEAJOUT 50
 
 int initTab(int* tab, int size) {
-	if (tab==NULL || size < 0) {  //Si on ne peut pas initialiser le tableau
+	if (tab == NULL || size < 0) {  //Si on ne peut pas initialiser le tableau
 		return(-1);
 	}
 
 	else {                                      //Si on peut
-		for (int i = 0; i < size; i++) {         //on initialise à 0
+		for (int i = 0; i < size; i++) {         //on initialise Ã  0
 			*(tab + i) = 0;
 		}
 		return(size);
@@ -21,8 +21,8 @@ int afficheTab(int* tab, int size, int nbElts) {
 		return(-1);
 	}
 	else {
-		for (int i = 0; i < nbElts; i++) {   //On affiche chaque élément
-			printf("%d", *(tab + i));        //un par un
+		for (int i = 0; i < nbElts; i++) {   //On affiche chaque Ã©lÃ©ment
+			printf(" %d", *(tab + i));        //un par un
 		}
 		return(0);
 	}
@@ -35,12 +35,13 @@ int* ajoutElementDansTableau(int* tab, int* size, int* nbElts, int element) {
 	else {
 		if (*size < nbElts) {		//Si le tableau est trop petit 
 			*size = *size + TAILLEAJOUT;	//On l'agrandit
-			tab = (int*)realloc(tab, *size);  //On réallout
+			tab = (int*)realloc(tab, *size);  //On rÃ©allout
 		}
 		else {
 			*(tab + *nbElts) = element;	//On ajoute les nouveaux termes
 			*nbElts = *nbElts + 1; // On actualise le nombre d'elements
-			return(*nbElts);  //On retourne le nombre d'éléments
+			return(*nbElts);  //On retourne le nombre d'Ã©lÃ©ments
 		}
 
+	}
 }
