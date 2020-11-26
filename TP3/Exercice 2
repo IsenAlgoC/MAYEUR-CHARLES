@@ -1,1 +1,24 @@
-a
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+#include <stdbool.h>
+
+int main() {
+	unsigned int entier = 2868838400;
+	printf("Le nombre est composé de %i octets\n",sizeof(entier));
+	printf("Le nombre de bits dont est composé l'entier est : %d bits\n", 8 * sizeof(entier));
+	unsigned int j=1;
+	unsigned int tmp;
+	for (int i = 1; i <= 32; i++) {
+		tmp = j & entier;
+		if (tmp == j) {
+			printf("bit %d : ON\n", i);
+		}
+		else {
+			printf("bit %d : OFF\n", i);
+		}
+		j = j <<1 ;
+	}
+	printf("Bye!");
+}
