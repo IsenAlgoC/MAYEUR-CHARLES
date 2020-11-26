@@ -1,4 +1,4 @@
-#include "tab.h"
+#include "Test.h"
 #include <stdio.h> 
 
 #define TAILLEINITIALE 100
@@ -11,22 +11,24 @@ int main() {
 	int TAB2SIZE = TAILLEINITIALE;
 
 	initTab(MyTab1, 10);         //Tests des fonctions sur MyTab1
-	afficheTab(MyTab1, 10, 10);
+	afficheTab(MyTab1, 10, 10);  //Affichage des 0 de MyTab1
+
+	printf("\n");
 
 	if (MyTab2 != NULL) {
 		initTab(MyTab2, TAB2SIZE); //Test de la fonction initTab sur MyTab2
 	}
 	else {
-		printf("mémoire insuffisante");
+		printf("mÃ©moire insuffisante");
 		return(-1);
 	}
 
-	for (int i = 0; i < TAILLEINITIALE; i++) {   //on remplie les 20 premières valeurs du tableau de 1 à 20
+	for (int i = 0; i < TAILLEINITIALE; i++) {   //on remplie les 20 premiÃ¨res valeurs du tableau de 1 Ã  20
 		*(MyTab2 + i) = i + 1;
 	}
 
 	afficheTab(MyTab2, TAB2SIZE, 20);  //On affiche les valeurs de MyTab2
 
-	free(MyTab2);//On libère la mémoire
+	free(MyTab2);  //On libÃ¨re la mÃ©moire
 
 }
