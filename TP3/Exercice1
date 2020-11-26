@@ -1,0 +1,11 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+
+int main() {
+	#define carre(x) (x)*(x)
+	int Nb = 1;
+	printf("%i", carre(Nb+4));  //carre(Nb+1) ne calcul pas le carré de Nb+1, on obtient 11 au lieu de 36
+	//carre ne gere pas les priorités entre opérations, en rajoutant des parentheses elle fonctionne
+}
