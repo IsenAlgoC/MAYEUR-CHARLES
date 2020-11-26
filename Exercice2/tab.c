@@ -1,19 +1,29 @@
 #include <stdio.h> 
-#include "tab.h"
-#define TAILLEINITIALE 100
+#include "Test.h"
+#define TAILLEINITIALE 10
 
-int main() {
+void main() {
+	//Création de tableau
 	TABLEAU MyTab;
+	MyTab = newArray();
+	printf("Test d'affichage de 10 valeurs '0': \n");
+	displayElements(&MyTab, 1, TAILLEINITIALE); 
+
+	printf("\nTest d'augmentation de taille de 2 : \n");
+	incrementArraySize(&MyTab, 2);
+	displayElements(&MyTab, 1, TAILLEINITIALE + 2);
+
+	printf("\nTest d'ajout de la valeur 5 a la position 9 : \n");
+	setElement(&MyTab, 9, 5);
+	displayElements(&MyTab, 1, TAILLEINITIALE + 2);
+
+	printf("\nTest d'ajout de la valeur 4 a la position 10 : \n");
+	setElement(&MyTab, 10, 4);
+	displayElements(&MyTab, 1, TAILLEINITIALE + 2);
+
+	printf("\nTest de suppression d'élément de la position 9 a 10: \n");
+	deleteElements(&MyTab, 9, 10);
 	displayElements(&MyTab, 1, TAILLEINITIALE);
 
-	incrementArraySize(&MyTab, 1);
-	displayElements(&MyTab, 1, TAILLEINITIALE + 1);
-
-	setElement(&tab, 9, 12);
-	displayElements(&tab, 9, TAILLEINITIALE +1);
-
-	deleteElements(&tab, 9, 10);
-	displayElements(&tab, 1, TAILLEINITIALE);
-
-	free(tab.elt);
+	free(MyTab.elt);
 }
