@@ -1,28 +1,28 @@
 #include <stdlib.h>
 #include <stdio.h>
-#define TAILLEINITIALE 100
+#define TAILLEINITIALE 10
 
 typedef struct Tableau {
 	int* elt;	//le tableau d'entiers
-	int size;	// la taille de ce tableau d’entiers
+	int size;	// la taille de ce tableau dâ€™entiers
 	int eltsCount;	//le nombre d'elements dans le tableau
 } TABLEAU;
 
 TABLEAU newArray() {
-	TABLEAU tab;                                           //On crée le tableau
-	tab.elt = (int*)malloc(TAILLEINITIALE * sizeof(int));  //On allout la mémoire
+	TABLEAU tab;                                           //On crÃ©e le tableau
+	tab.elt = (int*)malloc(TAILLEINITIALE * sizeof(int));  //On allout la mÃ©moire
 	tab.size = TAILLEINITIALE;                             //On initialise la taille
-	tab.eltsCount = 0;                                     //On initialise le nombre d'éléments
-	for (int i = 0; i < tab.size; i++) {	               //On initialise les valeurs du tableau à 0
+	tab.eltsCount = 0;                                     //On initialise le nombre d'Ã©lÃ©ments
+	for (int i = 0; i < tab.size; i++) {	               //On initialise les valeurs du tableau Ã  0
 		*(tab.elt + i) = 0;
 	}
 	return(tab);
 }
 
 int incrementArraySize(TABLEAU* tab, int incrementValue) {
-	tab->elt = (int*)realloc(tab->elt, (tab->size + incrementValue) * sizeof(int));  
+	tab->elt = (int*)realloc(tab->elt, (tab->size + incrementValue) * sizeof(int));
 	for (int i = tab->size; i < tab->size + incrementValue; i++) {
-		*(tab->elt + i) = 0;		//On initialise à 0
+		*(tab->elt + i) = 0;		//On initialise Ã  0
 	}
 	tab->size = tab->size + incrementValue;
 	if (tab->elt == NULL) {  //Si pointeur null
@@ -45,7 +45,7 @@ int setElement(TABLEAU* tab, int pos, int element) {
 			}
 			tab->size += (pos - tab->size);
 		}
-		if (*(tab->elt + pos - 1) == 0) {  // Si on ne remplace pas d'élément
+		if (*(tab->elt + pos - 1) == 0) {  // Si on ne remplace pas d'Ã©lÃ©ment
 			tab->eltsCount += 1;
 		}
 		*(tab->elt + pos - 1) = element;
@@ -54,11 +54,12 @@ int setElement(TABLEAU* tab, int pos, int element) {
 }
 
 int displayElements(TABLEAU* tab, int startPos, int endPos) {
-	int tmp;
+	
 	if (tab->elt == NULL) {
 		return(-1);
 	}
 	else {
+		int tmp;
 		if (startPos > endPos) {
 			tmp = startPos;
 			startPos = endPos;
@@ -77,7 +78,7 @@ int deleteElements(TABLEAU* tab, int startPos, int endPos) {
 		return(-1);
 	}
 	else {
-		if (startPos > endPos) {	
+		if (startPos > endPos) {
 			tmp = startPos;
 			startPos = endPos;
 			endPos = tmp;
@@ -90,4 +91,3 @@ int deleteElements(TABLEAU* tab, int startPos, int endPos) {
 		return(tab->size);
 	}
 }
-
