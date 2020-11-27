@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <conio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdio.h>
+
+int main(){
+	char buffer[1024]; 
+	gets_s(buffer, 1024);
+	float moyenne = 0.f;
+	int tmp = 0;
+	int nombre_mot = 1;
+	for (int i = 0; i < strlen(buffer); i++) {
+		if (buffer[i] == ' ') {
+			nombre_mot += 1;
+			moyenne += tmp;
+			tmp = 0;
+		}
+		else {
+			tmp += 1;
+		}
+	}
+	moyenne = moyenne / nombre_mot;
+	printf("Il y a %d mots, d'une taille moyenne de %f lettres.", nombre_mot, moyenne);
+}
