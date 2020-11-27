@@ -1,0 +1,43 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+
+void maxi(int* a, int* b) {
+	if (*b < *a) {
+		int d = 0;
+		d = *a;
+		*a = *b;
+		*b = d;
+	}
+}
+
+int main(){
+	
+	while (1 == 1) {
+		float h = 0.;
+		float l = 0.;
+		float L = 0.;
+		while ((150.f < h) || (h < 1.f) || (150.f < l) || (l < 1.f) || (150.f < L) || (L < 1.f)) {
+			printf("Entrez la hauteur de votre colis en cm : ");
+			scanf_s("%f", &h);
+
+			printf("Entrez la longeur de votre colis en cm : ");
+			scanf_s("%f", &l);
+
+			printf("Entrez la largeur de votre colis en cm : ");
+			scanf_s("%f", &L);
+
+		}
+		maxi(&h, &l);
+		maxi(&h, &L);
+		maxi(&l, &L);
+
+		if (L < 55. && l < 35. && h < 25.) {
+			printf("VALIDE\n");
+		}
+		else {
+			printf("NON VALIDE\n");
+		}
+	}
+}
