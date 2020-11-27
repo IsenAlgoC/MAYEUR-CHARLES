@@ -1,0 +1,48 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <conio.h>
+#include <ctype.h>
+#include <string.h>
+#define size 20
+
+int main() {
+	char mot[size];
+	printf("Entrer votre mot : ");
+	scanf_s("%s", mot, (unsigned)_countof(mot));
+	 //A:Z 65-90   a:z 97-122
+	int nombre = strlen(mot);
+	int pair = nombre % 2;
+	int palindrome = 1;
+	printf("%d\n", nombre);
+	printf("%d\n", nombre / 2);
+
+	switch (pair) {
+	case 0:                                             //Si c'est un mot à un nombre pair de caractères
+		for (int i = 0; i < nombre / 2; i++) {
+			if (mot[i] != mot[nombre - 1-i ]) {
+				palindrome = 0;
+			}
+		}
+		break;
+	case 1:                                             //Si c'est un mot à un nombre impair de caractères
+		for (int i = 0; i < nombre / 2; i++) {
+			if (mot[i] != mot[nombre -1- i ]) {
+				palindrome = 0;
+			}
+		}
+	default:
+		break;
+	}
+	switch (palindrome) {                               //Affiche si c'est un palindrome ou non
+	case 0:
+		printf("N'est pas un palindrome");
+		break;
+	case 1:
+		printf("Est un palindrome");
+		break;
+	default:
+		printf("Ca beug");
+		break;
+	}
+}
