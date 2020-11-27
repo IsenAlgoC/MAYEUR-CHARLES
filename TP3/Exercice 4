@@ -1,1 +1,118 @@
-a
+#include <stdio.h>
+#include <stdlib.h>
+#include <iso646.h>
+
+unsigned char IPv4_to_reseau(unsigned char w, unsigned char x, unsigned char y, unsigned char z, unsigned char mask) {
+	unsigned char tmp = mask;
+	int tmp2=0;
+	if (tmp >= 8) {
+		w = w & 255;
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		w = w & tmp2;
+	}
+	if (tmp >= 8) {
+		x = x & 255;
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		x = x & tmp2;
+	}
+	if (tmp >= 8) {
+		y = y & 255;
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		y = y & tmp2;
+	}
+	if (tmp >= 8) {
+		z = z & 255;
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		z = z & tmp2;
+	}
+	return(w, x, y, z);
+}
+
+unsigned char reseau_to_broadcast(unsigned char w, unsigned char x, unsigned char y, unsigned char z, unsigned char mask) {
+	unsigned char tmp = mask;
+	int tmp2 = 0;
+	if (tmp >= 8) {
+		w = w ^ 255;
+		w = compl(w);
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		w = w ^ tmp2;
+		w = compl(w);
+	}
+	if (tmp >= 8) {
+		x = x ^ 255;
+		x = compl(x);
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		x = x ^ tmp2;
+		x = compl(x);
+	}
+	if (tmp >= 8) {
+		y = y ^ 255;
+		y = compl(y);
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		y = y ^ tmp2;
+		y = compl(y);
+	}
+	if (tmp >= 8) {
+		z = z ^ 255;
+		z = compl(z);
+		tmp -= 8;
+	}
+	else {
+		for (int i = 0; i < tmp; i++) {
+			tmp2 += pow(2, i);
+		}
+		z = z ^ tmp2;
+		z = compl(z);
+	}
+	return(w, x, y, z);
+}
+
+
+int main() {
+	unsigned char w = (unsigned char)192;
+	unsigned char x = (unsigned char)168;
+	unsigned char y = (unsigned char)129;
+	unsigned char z = (unsigned char)10;
+	
+	w, x, y, z = IPv4_to_reseau(w, x, y, z, 24);
+	printf("%u.%u.%u.%u / %u\n", w, x, y, z, 24);
+
+	w, x, y, z = reseau_to_broadcast(w, x, y, z, 24);
+	printf("%u.%u.%u.%u \n", w, x, y, z);
+	
+}
