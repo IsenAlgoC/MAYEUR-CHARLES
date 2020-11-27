@@ -1,0 +1,28 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+
+int main() {
+	srand(time(NULL));
+	int nombre = rand()% 100;
+	int proposition = 0;
+	int trouve = 0;
+	int score = 0;
+	while (trouve == 0) {
+		printf("Essayez de deviner le nombre");
+		scanf_s("%d", &proposition);
+		if (proposition > nombre) {
+			printf("Votre nombre est trop grand.\n");
+			score = score+1;
+		}
+		else if(proposition < nombre) {
+			printf("Votre nombre est trop petit.\n");
+			score = score + 1;
+		}
+		else if(proposition == nombre) {
+			printf("Vous avez trouvé le bon nombre : %d\nVotre score est de %d",nombre,score);
+			trouve == 1;
+		}
+	}
+}
