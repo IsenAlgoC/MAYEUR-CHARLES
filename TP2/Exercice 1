@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+
+
+int main() {
+
+    unsigned short int j = 0;
+    int i = 1;
+    unsigned short int n = 362;
+    while (n > 361) {
+        printf("Entrez une valeur n inférieure à 361 svp\n");
+        scanf_s("%hu", &n);
+    }
+    //Boucle for
+    for (i; i < n; i++) {
+        j = j + i;
+    }
+    printf("%d, %d, ", j, i-1);     //La somme vaut un nombre plus petit que pow(2,16)-1 
+
+    //Boucle while
+    unsigned short int p = 0;
+    int g = 1;
+    while( g < 101){
+        p = p + g;
+        g = g + 1;
+    }
+    printf("%d, %d, ", p, g-1);
+
+    //Boucle Do While
+    unsigned short int q = pow(2,16);
+    int a = 1;
+    do {
+        q = q + a;
+        a = a + 1;
+    } while (a<101);
+    printf("%d, %d,\n", q, a-1);
+
+    //Boucle while avec condition anti depassement
+    //La valeur maximale est n=361
+
+    unsigned short int b = 0;
+    int z = 1;
+    while (z < 101 && b+z<pow(2,16)) {
+        b = b + z;
+        z = z + 1;
+    }
+    printf("%d, %d, ", b, z-1);
+}
