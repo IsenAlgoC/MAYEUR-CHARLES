@@ -1,0 +1,24 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+
+
+int main() {
+	int n = 0;
+	int bissextile = 0;
+	printf("Entrez une année inférieure à 10 000 :\n");
+	scanf_s("%d",&n);
+	if (n % 4 == 0 && n%100!=0 ) {
+		bissextile = 1;
+	}
+	if (n % 400 == 0) {
+		bissextile = 1;
+	}
+	if (bissextile == 1) {
+		printf("Cette année est bissextile");
+	}
+	else{
+		printf("Cette année n'est pas bissextile");
+	}
+}
