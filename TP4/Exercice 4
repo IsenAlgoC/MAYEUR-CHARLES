@@ -10,8 +10,10 @@ int main() {
 	char mot[size];
 	printf("Entrer votre mot : ");
 	scanf_s("%s", mot, (unsigned)_countof(mot));
-	 //A:Z 65-90   a:z 97-122
 	int nombre = strlen(mot);
+	for (int i = 0; i < nombre; i++) { //Passage des majuscules en minuscules
+		mot[i] = tolower(mot[i]);
+	}
 	int pair = nombre % 2;
 	int palindrome = 1;
 	printf("%d\n", nombre);
