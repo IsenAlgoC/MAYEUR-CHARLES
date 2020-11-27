@@ -1,1 +1,207 @@
-a
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <math.h>
+#include <stdbool.h>
+#include <conio.h>
+#include <ctype.h>
+
+#define NBMAXNOTES 30
+
+int main() {
+	float Note;
+	int absent=0;
+	int valide=0;
+	float moyenne=0;
+	float min=20;
+	float max=0;
+	float note[NBMAXNOTES] = {-2.};
+	int remplissage = 0;
+	float ecart_type=0.;
+	bool arret = false;
+	float tmp;
+	for (int i = 0; i < NBMAXNOTES; i++) {
+		printf("Entrer la note no [%d] : ", i);
+		scanf_s("%f", &Note);
+		if (Note < 0.f || Note>20.f) {
+			int ch;
+			_cputs("Vous avez tapé une note invalide, l'eleve est-il (A)bsent ou voulez-vous arreter la saisie (O)ui,(N)on?");
+			do
+			{
+				ch = _getch();
+				ch = toupper(ch);
+			} while (ch != 'A' && ch != 'O' && ch != 'N');
+			_putch(ch);
+
+			switch (ch) {
+			case 'O':
+				moyenne = moyenne / valide;
+				printf("\n");
+				for (int i = 0; i < remplissage; i++) {
+					ecart_type = ecart_type + (note[i] - moyenne) * (note[i] - moyenne);
+				}
+				ecart_type = ecart_type / (valide - 1);
+				ecart_type = sqrt(ecart_type);
+				printf("La moyenne de ces %d note(s) est : %f \n\n", valide, moyenne);
+				printf("Il y a %d absences.\n", absent);
+				printf("La plus petite note est : %f,la plus grande est : %f \n", min, max);
+				printf("L'ecart type vaut : %f\n", ecart_type);
+				printf("       No Note Valeur note\n");
+				for (int i = 0; i < remplissage; i++) {
+					printf("       %d         %f\n", i, note[i]);
+				}
+				float note_copie[NBMAXNOTES];
+				for (int i = 0; i < remplissage; i++) {
+					note_copie[i] = note[i];
+				}
+				int indice[NBMAXNOTES];
+				for (int i = 0; i < remplissage; i++) {
+					indice[i] = i;
+				}
+				while (arret != true) {
+					arret = true;
+					for (int i = 0; i < remplissage - 1; i++) {
+						if (note_copie[i] < note_copie[i + 1]) {
+							arret = false;
+							tmp = note_copie[i];
+							note_copie[i] = note_copie[i + 1];
+							note_copie[i + 1] = tmp;
+							tmp = indice[i];
+							indice[i] = indice[i + 1];
+							indice[i + 1] = tmp;
+						}
+					}
+				}
+				printf("       Rang:   No Note   Valeur note\n");
+				for (int i = 0; i < remplissage; i++) {
+					printf("       %d        %d        %f\n", i, indice[i], note_copie[i]);
+				}
+				printf("Bye!");
+				return(0);
+				break;
+			case 'N':
+				printf("\nEn cas de nouvelle mauvaise saisie de note, la saisie des notes s'arrete. Entrez à nouveau la note no [%d] : ", i);
+				scanf_s("%d", &Note);
+				if (Note < 0.f || Note>20.f) {
+					moyenne = moyenne / valide;
+					printf("\n");
+					for (int i = 0; i < remplissage; i++) {
+						ecart_type = ecart_type + (note[i] - moyenne) * (note[i] - moyenne);
+					}
+					ecart_type = ecart_type / (valide - 1);
+					ecart_type = sqrt(ecart_type);
+					printf("La moyenne de ces %d note(s) est : %f \n\n", valide, moyenne);
+					printf("Il y a %d absences.\n", absent);
+					printf("La plus petite note est : %f,la plus grande est : %f \n", min, max);
+					printf("L'ecart type vaut : %f\n", ecart_type);
+					printf("       No Note Valeur note\n");
+					for (int i = 0; i < remplissage; i++) {
+						printf("       %d         %f\n", i, note[i]);
+					}
+					float note_copie[NBMAXNOTES];
+					for (int i = 0; i < remplissage; i++) {
+						note_copie[i] = note[i];
+					}
+					int indice[NBMAXNOTES];
+					for (int i = 0; i < remplissage; i++) {
+						indice[i] = i;
+					}
+					while (arret != true) {
+						arret = true;
+						for (int i = 0; i < remplissage - 1; i++) {
+							if (note_copie[i] < note_copie[i + 1]) {
+								arret = false;
+								tmp = note_copie[i];
+								note_copie[i] = note_copie[i + 1];
+								note_copie[i + 1] = tmp;
+								tmp = indice[i];
+								indice[i] = indice[i + 1];
+								indice[i + 1] = tmp;
+							}
+						}
+					}
+					printf("       Rang:   No Note   Valeur note\n");
+					for (int i = 0; i < remplissage; i++) {
+						printf("       %d        %d        %f\n", i, indice[i], note_copie[i]);
+					}
+					printf("Bye!");
+					return(0);
+				}
+				else {
+					if (Note < min) {
+						min = Note;
+					}
+					if (Note > max) {
+						max = Note;
+					}
+					note[i] = Note;
+					remplissage++;
+					moyenne += Note;
+					valide++;
+				}
+				break;
+			case 'A':
+				absent++;
+				note[i] = -1;
+				remplissage++;
+			default:
+				break;
+			}
+			_putch('\n');
+		}
+		else {
+			if (Note < min) {
+				min = Note;
+			}
+			if (Note > max) {
+				max = Note;
+			}
+			note[i] = Note;
+			remplissage++;
+			moyenne += Note;
+			valide++;
+		}
+	}
+	moyenne = moyenne / valide;
+	printf("\n");
+	for (int i = 0; i < remplissage; i++) {
+		ecart_type = ecart_type + (note[i] - moyenne) * (note[i] - moyenne);
+	}
+	ecart_type = ecart_type / (valide - 1);
+	ecart_type = sqrt(ecart_type);
+	printf("La moyenne de ces %d note(s) est : %f \n\n", valide, moyenne);
+	printf("Il y a %d absences.\n", absent);
+	printf("La plus petite note est : %f,la plus grande est : %f \n", min, max);
+	printf("L'ecart type vaut : %f\n", ecart_type);
+	printf("       No Note Valeur note\n");
+	for (int i = 0; i < remplissage; i++) {
+		printf("       %d         %f\n", i, note[i]);
+	}
+	float note_copie[NBMAXNOTES];
+	for (int i = 0; i < remplissage; i++) {
+		note_copie[i] = note[i];
+	}
+	int indice[NBMAXNOTES];
+	for (int i = 0; i < remplissage; i++) {
+		indice[i] = i;
+	}
+	while (arret != true) {
+		arret = true;
+		for (int i = 0; i < remplissage-1; i++) {
+			if (note_copie[i] < note_copie[i + 1]) {
+				arret = false;
+				tmp = note_copie[i];
+				note_copie[i] = note_copie[i + 1];
+				note_copie[i + 1] = tmp;
+				tmp = indice[i];
+				indice[i] = indice[i + 1];
+				indice[i + 1] = tmp;
+			}
+		}
+	}
+	printf("       Rang:   No Note   Valeur note\n");
+	for (int i = 0; i < remplissage; i++) {
+		printf("       %d        %d        %f\n", i,indice[i], note_copie[i]);
+	}
+	printf("Bye!");
+}
