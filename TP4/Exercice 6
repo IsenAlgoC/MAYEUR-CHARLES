@@ -1,0 +1,47 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define size 100
+
+int aleatoire(int min, int max) {
+	int number = (int)((double)rand() / (RAND_MAX + 1) * (max - min)) + min;
+	return(number);
+}
+
+int recherche(int *ptr,int nombre) {
+	int fois=0;
+	for (int i = 0; i < size; i++) {
+		if (*ptr == nombre) {
+			fois++;
+		}
+		ptr++;
+	}
+	if (fois == 0) {
+		printf("La valeur n'as pas ete trouvee.");
+		return(0);
+	}
+	else {
+		printf("La valeur %d a ete trouvee %d fois", nombre, fois);
+		return(1);
+	}
+}
+
+int main() {
+	int tab[size];
+	int* ptr = NULL;
+	ptr = &tab[0];
+
+	//Remplissage du tableau
+	for (int i = 0; i < size; i++) {
+		tab[i] = aleatoire(0, 20);
+	}
+
+	//Recherche de 19
+	recherche(&ptr, 5);
+
+	//Affichage du tableau pour vérifier
+	printf("\n");
+	for (int i = 0; i < size; i++) {
+		printf("%d ", tab[i]);
+	}
+}
