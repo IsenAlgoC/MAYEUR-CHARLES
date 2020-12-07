@@ -39,33 +39,33 @@ int setElement(TABLEAU* tab, int pos, int element) {
 	}
 	else {                      //Sinon
 		if (pos > tab->size) {  //S'il est en dehors du tableau
-			incrementArraySize(tab, pos - tab->size);
-			for (int i = tab->size; i <= pos - tab->size; i++) {
+			incrementArraySize(tab, pos - tab->size);    //Augmente la taille du tableau pour pouvoir le mettre
+			for (int i = tab->size; i <= pos - tab->size; i++) {     //On mets des 0 pour chaque élément entre la fin du tableau et le nouveau
 				*(tab->elt + i) = 0;
 			}
-			tab->size += (pos - tab->size);
+			tab->size += (pos - tab->size);   //Augmente size
 		}
 		if (*(tab->elt + pos - 1) == 0) {  // Si on ne remplace pas d'élément
 			tab->eltsCount += 1;
 		}
-		*(tab->elt + pos - 1) = element;
+		*(tab->elt + pos - 1) = element; //On ajoute l'élément
 		return(pos);
 	}
 }
 
 int displayElements(TABLEAU* tab, int startPos, int endPos) {
 	
-	if (tab->elt == NULL) {
+	if (tab->elt == NULL) { //Si pas d'élément
 		return(-1);
 	}
 	else {
 		int tmp;
-		if (startPos > endPos) {
+		if (startPos > endPos) {        //Si positions mal rangées on les range dans l'ordre croissant
 			tmp = startPos;
 			startPos = endPos;
 			endPos = tmp;
 		}
-		for (tmp = startPos - 1; tmp < endPos; tmp++) {
+		for (tmp = startPos - 1; tmp < endPos; tmp++) { //On affiche les éléments du tableau
 			printf_s("%d", *(tab->elt + tmp));
 		}
 		return(0);
@@ -74,16 +74,16 @@ int displayElements(TABLEAU* tab, int startPos, int endPos) {
 
 int deleteElements(TABLEAU* tab, int startPos, int endPos) {
 	int tmp;
-	if (tab->elt == NULL) {
+	if (tab->elt == NULL) {                     //Si pas d'élément dans le tableau
 		return(-1);
 	}
-	else {
-		if (startPos > endPos) {
+	else {                                      //Sinon
+		if (startPos > endPos) {            //Si les positions sont mal rangées entre elles, on les range dans l'ordre croissant
 			tmp = startPos;
 			startPos = endPos;
 			endPos = tmp;
 		}
-		for (tmp = 0; tmp < tab->size - endPos; tmp++) {
+		for (tmp = 0; tmp < tab->size - endPos; tmp++) {                                //On supprime les éléments des positions startPos jusque endPos
 			*(tab->elt + startPos - 1 + tmp) = *(tab->elt + endPos + tmp);
 		}
 		tab->elt = (int*)realloc(tab->elt, (tab->size - endPos + startPos) * sizeof(int));
