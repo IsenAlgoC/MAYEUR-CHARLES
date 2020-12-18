@@ -38,6 +38,7 @@ int ajouter_un_contact_dans_rep(Repertoire* rep, Enregistrement enr)
 #else
 #ifdef IMPL_LIST
 	bool inserted = false;
+	compact(enr.tel);
 	if (rep->nb_elts == 0) {
 		if (InsertElementAt(rep->liste, rep->liste->size, enr) != 0) {
 			rep->nb_elts += 1;
@@ -65,7 +66,7 @@ int ajouter_un_contact_dans_rep(Repertoire* rep, Enregistrement enr)
 
 #endif
 	return(OK);
-	
+
 } /* fin ajout */
   /**********************************************************************/
   /* supprime du répertoire l'enregistrement dont l'indice est donné en */
@@ -202,7 +203,7 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 {
 	int i = ind;		    /* position (indice) de début de recherche dans tableau/liste rep */
 	int ind_fin;			/* position (indice) de fin de tableau/liste rep */
-	
+
 	char tmp_nom[MAX_NOM];	/* 2 variables temporaires dans lesquelles */
 	char tmp_nom2[MAX_NOM];	/* on place la chaine recherchee et la chaine lue dans le */
 							/* tableau, afin de les convertir en majuscules et les comparer */
@@ -213,7 +214,7 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 	strncpy_s(tmp_nom, _countof(tmp_nom), nom, _TRUNCATE);
 	_strupr_s(tmp_nom, _countof(tmp_nom));
 
-	while ((i <= ind_fin) && (!trouve)){
+	while ((i <= ind_fin) && (!trouve)) {
 		strncpy_s(tmp_nom2, _countof(tmp_nom2), rep->tab[i].nom, _TRUNCATE);
 		_strupr_s(tmp_nom2, _countof(tmp_nom2));
 		if (strcmp(tmp_nom, tmp_nom2) == 0) {
@@ -256,7 +257,7 @@ int rechercher_nom(Repertoire* rep, char nom[], int ind)
 void compact(char* s)
 {
 	for (int i = 0; i < strlen(s) - 1; i++) {
-		if ((int)s[i] <= 57 && (int)s[i] >= 48) {
+		if ((int)s[i] > 57 || (int)s[i] < 48) {
 			for (int j = i; j < strlen(s) - 1; j++) {
 				s[j] = s[j + 1];
 			}
@@ -325,7 +326,7 @@ int charger(Repertoire* rep, char nom_fichier[])
 	int idx = 0;
 	Enregistrement enr;
 	char* char_nw_line;
-	int compteur=0;
+	int compteur = 0;
 
 	_set_errno(0);
 	if (((err = fopen_s(&fic_rep, nom_fichier, "r")) != 0) || (fic_rep == NULL))
@@ -369,7 +370,7 @@ int charger(Repertoire* rep, char nom_fichier[])
 							num_rec++;		/* element à priori correct, on le comptabilise */
 					}
 				}
-				InsertElementAt(rep->liste,rep->liste->size, enr);
+				InsertElementAt(rep->liste, rep->liste->size, enr);
 				compteur++;
 #endif
 #endif

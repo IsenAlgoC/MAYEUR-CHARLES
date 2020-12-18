@@ -9,8 +9,8 @@
 
 
 // crée une nouvelle liste chainée unilataire vide et renvoie un pointeur sur cette liste
-LinkedList *NewLinkedList() {
-	LinkedList *tmp;
+LinkedList* NewLinkedList() {
+	LinkedList* tmp;
 	tmp = (LinkedList*)malloc(sizeof(LinkedList));
 	if (tmp != NULL) {
 		tmp->head = NULL;
@@ -20,24 +20,24 @@ LinkedList *NewLinkedList() {
 	return tmp;
 }
 // crée un nouveau maillon qui contient la personne passée en paramètre
-SingleLinkedListElem  *NewLinkedListElement(Enregistrement pers) {
-	SingleLinkedListElem *tmp;
-	tmp = (SingleLinkedListElem *)malloc(sizeof(SingleLinkedListElem));
-	if (tmp != NULL) {	
-	tmp->pers = pers;
-	tmp->next = NULL;
+SingleLinkedListElem* NewLinkedListElement(Enregistrement pers) {
+	SingleLinkedListElem* tmp;
+	tmp = (SingleLinkedListElem*)malloc(sizeof(SingleLinkedListElem));
+	if (tmp != NULL) {
+		tmp->pers = pers;
+		tmp->next = NULL;
 	}
 	return(tmp);
 }
 // renvoie un pointeur sur l'élément en ième position dans la liste
-SingleLinkedListElem *GetElementAt(LinkedList *Liste, int i) {
+SingleLinkedListElem* GetElementAt(LinkedList* Liste, int i) {
 	int CurrentIndex = 0;
-	SingleLinkedListElem *Element;
+	SingleLinkedListElem* Element;
 	if ((Liste == NULL) || (i < 0) || (i >= Liste->size)) return(NULL);
 	if (i == 0) return(Liste->head);
 	if (i == Liste->size - 1) return(Liste->tail);
 	Element = Liste->head;
-	while (CurrentIndex != i  && Element != NULL) {
+	while (CurrentIndex != i && Element != NULL) {
 		Element = Element->next;
 		CurrentIndex++;
 	}
@@ -49,8 +49,8 @@ SingleLinkedListElem *GetElementAt(LinkedList *Liste, int i) {
 //
 // FONCTION A COMPLETER AUX ENDROITS INDIQUES
 
-int InsertElementAt(LinkedList *Liste, int i, Enregistrement pers) {
-	SingleLinkedListElem *CurrentElement, *NewElement;
+int InsertElementAt(LinkedList* Liste, int i, Enregistrement pers) {
+	SingleLinkedListElem* CurrentElement, * NewElement;
 	if (Liste == NULL) return(0);
 	// recherche de l'élément qui se trouve déjà en position i
 	CurrentElement = GetElementAt(Liste, i);
@@ -85,7 +85,7 @@ int InsertElementAt(LinkedList *Liste, int i, Enregistrement pers) {
 				Liste->size++;
 				return(1);
 				//insertion code ici
-		}
+			}
 			else {
 				return(0);
 			}
@@ -98,12 +98,12 @@ int InsertElementAt(LinkedList *Liste, int i, Enregistrement pers) {
 				Liste->size++;
 				return(1);
 
-			//
-			//
-			//   insertion code ici
-			//
-			//
-			//
+				//
+				//
+				//   insertion code ici
+				//
+				//
+				//
 			}
 			else {
 				return(0);
@@ -117,30 +117,30 @@ int InsertElementAt(LinkedList *Liste, int i, Enregistrement pers) {
 // Suppression d'un élément de la liste chaînée
 //
 // FONCTION A COMPLETER
-int DeleteLinkedListElem(LinkedList * list, SingleLinkedListElem * item) {
+int DeleteLinkedListElem(LinkedList* list, SingleLinkedListElem* item) {
 	if (list == NULL) return(0); // La liste n'existe pas
 	if ((list->head == NULL) || (list->tail == NULL)) return(0); // liste vide ou anomalie
 	if ((list->head == list->tail) && (list->size != 1)) return(0); // anomalie
 	if ((list->size == 0) || (item == NULL)) return(0); // pas d'élément dans la liste ou item invalide
 
-	
+
 	if (GetElementAt(list, 0) == item) {   //Si élément en tete de liste
 		list->head = GetElementAt(list, 1);
 		list->size--;
 		return(1);
 	}
 
-	for (int i = 1; i < list->size-1; i++) {             //L'élément est il dans la liste
+	for (int i = 1; i < list->size - 1; i++) {             //L'élément est il dans la liste
 		if (GetElementAt(list, i) == item) {
-			GetElementAt(list, i - 1)->next=GetElementAt(list, i+1);  //J'insère le nouveau à la place de l'ancien
+			GetElementAt(list, i - 1)->next = GetElementAt(list, i + 1);  //J'insère le nouveau à la place de l'ancien
 			list->size--;
 			return(1);
 		}
 	}
 
-	if (GetElementAt(list, list->size-1) == item) {  //Si l'élément est en queue
-		list->tail= GetElementAt(list, list->size-2);
-		GetElementAt(list, list->size-2)->next = NULL;
+	if (GetElementAt(list, list->size - 1) == item) {  //Si l'élément est en queue
+		list->tail = GetElementAt(list, list->size - 2);
+		GetElementAt(list, list->size - 2)->next = NULL;
 		list->size--;
 		return(1);
 	}
